@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EFWorkforce.Models.Department>
+﻿@model IEnumerable<EFWorkforce.Models.ViewModel.DepartmentSummaryViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -19,7 +19,7 @@
                 @Html.DisplayNameFor(model => model.Budget)
             </th>
             <th>
-                Employee Count
+                @Html.DisplayNameFor(model => model.EmployeeCount)
             </th>
 
         </tr>
@@ -34,7 +34,7 @@
                 @Html.DisplayFor(modelItem => item.Budget)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Employees.Count)
+                @Html.DisplayFor(modelItem => item.EmployeeCount)
             </td>
 
             <td>

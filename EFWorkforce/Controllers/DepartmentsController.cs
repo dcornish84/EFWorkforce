@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EFWorkforce.Data;
 using EFWorkforce.Models;
+using EFWorkforce.Models.ViewModel;
 
 namespace EFWorkforce.Controllers
 {
@@ -22,8 +23,16 @@ namespace EFWorkforce.Controllers
         // GET: Departments
         public async Task<IActionResult> Index()
         {
-            var departments = _context.Department.Include(e => e.Employees);
-            return View(await _context.Department.ToListAsync());
+            var departments = await _context.Department.Select(d => new DepartmentSummaryViewModel
+            {
+                Id = d.Id,
+                Name = d.Name,
+                Budget = d.Budget,
+                EmployeeCount = d.Employees.Count()
+
+
+            }).ToListAsync();
+            return View(departments);
         }
 
         // GET: Departments/Details/5
